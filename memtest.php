@@ -32,6 +32,6 @@ $e = memory_get_peak_usage();
 $mem = $e - $s;
 
 
-printf("peak memory%.4f MB\n", $mem, ($mem/1024)/1024);
+printf("peak memory %.4f MB\n", ($mem/1024)/1024);
 printf("algo time %.4f seconds (doesnt include data structure creation time)\n", ($te - $ts));
 //print_r($cliques);
