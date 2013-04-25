@@ -26,7 +26,7 @@ $cliques = [];
 //bronKerbosch([], $verts, [], $list);
 //bronKerboschWithPivoting([], $verts, [], $list, $firstVert);
 $ts = microtime(true);
-bronKerboschWithVertexOrdering([], $verts, [], $list, $lastVert);
+bronKerboschWithVertexOrdering(array(), $verts, array(), $list, $lastVert);
 $te = microtime(true);
 $e = memory_get_peak_usage();
 $mem = $e - $s;

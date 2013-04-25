@@ -8,7 +8,7 @@
      * ];
      */
 function getAdjacencyList() {
-    $file = 'C:\ws\apache\htdocs\wowarmory\script\clique.sqlite';
+    $file = 'clique.sqlite';
     try {
         $dbh = new PDO("sqlite:$file");
         $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
