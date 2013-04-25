@@ -22,7 +22,7 @@ $midVert = function($vertices) {
 $s = memory_get_usage();
 $list = getAdjacencyList();
 $verts = array_combine(array_keys($list), array_keys($list));
-$cliques = [];
+$cliques = array();
 //bronKerbosch([], $verts, [], $list);
 //bronKerboschWithPivoting([], $verts, [], $list, $firstVert);
 $ts = microtime(true);
