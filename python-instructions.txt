@@ -1,0 +1,21 @@
+i used
+http://www.python.org/download/releases/2.7.4/
+64bit
+
+then i copied
+http://peak.telecommunity.com/dist/ez_setup.py
+
+into my python install dir(where python.exe lives)
+then executed it via shell
+>python easy_setup.py
+
+it made a Scripts dir, and installed some files into it.
+
+then i copied the networkx egg for 2.7 into python install dir
+https://pypi.python.org/pypi/networkx/
+
+then i think i did this from the shell
+>Scripts\easy_install.exe networkx-1.7-py2.7.egg
+
+
+I also put my python install dir in my os's path variable.
