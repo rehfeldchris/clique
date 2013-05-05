@@ -3,6 +3,7 @@
 ini_set('memory_limit', '512M');
 
 require_once 'datasource.php';
+require_once 'verifiedMaxCliques.php';
 require_once 'BronKerbosch-Implementations.php';
 
 /**
@@ -36,43 +37,44 @@ $midVert = function($vertices) {
 
 
 
-
+$edgeLimit = 4000000;
 gc_disable();
 
 $s = memory_get_usage();
-echo "loading data...\n";
-$list = getAdjacencyList();
-echo "data loaded\n";
+echo "loading data from database...";
+$list = getAdjacencyList($edgeLimit);
+echo "done\n\n";
 $verts = array_combine(array_keys($list), array_keys($list));
+
 
 
 $numNodes = count($list);
 $numEdges = array_sum(array_map('count', $list));
 
-
 //test bronKerbosch with pivot
-echo "testing bronKerbosch with pivoting algo on $numNodes nodes and $numEdges edges\n";
+printf("\nTesting bronKerbosch with pivoting algo on %s nodes and %s edges...\n", number_format($numNodes), number_format($numEdges));
+echo "This may take a while. Consider a cup of tea.\n";
 $cliques = array();
 $ts = microtime(true);
-bronKerboschWithPivoting(array(), $verts, array(), $list, $cliques, $randomVert);
+bronKerboschWithPivoting(array(), $verts, array(), $list, $cliques, $lastVert);
 $te = microtime(true);
-printf("algo execution time %.4f seconds (doesnt include data structure creation time)\n", ($te - $ts));
-printf("num max cliques %d\n", count($cliques));
+printf("  algo execution time %.2f seconds\n", ($te - $ts));
+printf("  num max cliques found %d\n", count($cliques));
+printf("  contains all verified max cliques? %s\n", containsVerifiedMaxCliques($cliques) ? 'true' : 'false');
 
 
 
 
-echo "testing bronKerbosch with pivoting + vertex ordering algo on $numNodes nodes and $numEdges edges\n";
+printf("\nTesting bronKerbosch with pivoting + vertex ordering algo on %s nodes and %s edges...\n", number_format($numNodes), number_format($numEdges));
+echo "This may take a while. Consider another cup of tea.\n";
 $cliques = array();
 $ts = microtime(true);
-bronKerboschWithVertexOrdering(array(), $verts, array(), $list, $cliques, $randomVert);
+bronKerboschWithVertexOrdering(array(), $verts, array(), $list, $cliques, $lastVert);
 $te = microtime(true);
-$e = memory_get_peak_usage();
-$mem = $e - $s;
 
 
+printf("  algo execution time %.2f seconds\n", ($te - $ts));
+printf("  num max cliques found %d\n", count($cliques));
+printf("  contains all verified max cliques? %s\n", containsVerifiedMaxCliques($cliques) ? 'true' : 'false');
 
-printf("peak memory %.4f MB\n", ($mem/1024)/1024);
-printf("algo time %.4f seconds (doesnt include data structure creation time)\n", ($te - $ts));
-printf("num max cliques %d\n", count($cliques));
 //print_r($cliques);

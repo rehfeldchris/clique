@@ -8,7 +8,7 @@ def getGraph():
 	"""assembles a graph datastructure from a database"""
 	conn = sqlite3.connect('edges.sqlite')
 	c = conn.cursor()
-	sql = "select node_a, node_b from edges limit 100000"
+	sql = "select node_a, node_b from edges limit 4000000"
 	G = nx.Graph()
 	
 	for row in c.execute(sql):
@@ -30,6 +30,6 @@ G = getGraph()
 ts = time()
 cliques = list(nx.find_cliques(G))
 te = time()
-print "algo time {0:f} seconds (doesnt include data structure creation time)\n".format(te-ts)
+print "algo time {0:f} seconds \n".format(te-ts)
 print "num max cliques {0:d}\n".format(len(cliques))
 #print cliques
