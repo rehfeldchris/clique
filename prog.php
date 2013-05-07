@@ -38,6 +38,7 @@ $midVert = function($vertices) {
 
 
 $edgeLimit = 4000000;
+
 gc_disable();
 
 $s = memory_get_usage();
@@ -50,6 +51,8 @@ $verts = array_combine(array_keys($list), array_keys($list));
 
 $numNodes = count($list);
 $numEdges = array_sum(array_map('count', $list));
+
+
 
 //test bronKerbosch with pivot
 printf("\nTesting bronKerbosch with pivoting algo on %s nodes and %s edges...\n", number_format($numNodes), number_format($numEdges));
@@ -77,4 +80,4 @@ printf("  algo execution time %.2f seconds\n", ($te - $ts));
 printf("  num max cliques found %d\n", count($cliques));
 printf("  contains all verified max cliques? %s\n", containsVerifiedMaxCliques($cliques) ? 'true' : 'false');
 
-//print_r($cliques);
+file_put_contents('cliques.txt', serialize($cliques));

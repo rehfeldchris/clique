@@ -14,14 +14,14 @@ public class JGraphTTest {
     public static void main(String[] args) throws Exception {
 
 		DataLoader dl = new DataLoader();
-		Graph<Integer, DefaultEdge> graph = dl.getGraph(20000);
+		Graph<Integer, DefaultEdge> graph = dl.getGraph(100000);
 		BronKerboschCliqueFinder finder = new BronKerboschCliqueFinder(graph);
 		long startTime = System.currentTimeMillis();
 		Collection<Set<Integer>> maxCliques = finder.getAllMaximalCliques();
 		long estimatedTime = System.currentTimeMillis() - startTime;
-		System.out.println(estimatedTime);
+		System.out.println(estimatedTime/1000);
 		for (Set set : maxCliques) {
-			System.out.println(set);
+			//System.out.println(set);
 		}
 
     }

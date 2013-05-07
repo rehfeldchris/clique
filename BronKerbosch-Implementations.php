@@ -18,10 +18,8 @@ function bronKerbosch($potentialClique, $candidateVerts, $alreadyFoundVerts, $ad
         
         //temporarily add the new vert to r
         $potentialClique[$candidateVert] = $candidateVert;
-        //echo join(',', array_intersect_key($candidateVerts, $neighborVerts)), "\n";
-        //exit;
         
-        bronKerbosch($potentialClique, $newCandidates, $newAlreadyFoundVerts, $adjacencyList);
+        bronKerbosch($potentialClique, $newCandidates, $newAlreadyFoundVerts, $adjacencyList, $resultCliques);
         //remove the temp vert from r
         unset($potentialClique[$candidateVert]);
         
@@ -85,5 +83,5 @@ function bronKerboschWithVertexOrdering($potentialClique, $candidateVerts, $alre
     uasort($candidateVerts, function($a, $b){
         return count($a) - count($b);
     });
-    return bronKerboschWithPivoting($potentialClique, $candidateVerts, $alreadyFoundVerts, $adjacencyList, $resultCliques, $pivotChoosingFunction);
+    bronKerboschWithPivoting($potentialClique, $candidateVerts, $alreadyFoundVerts, $adjacencyList, $resultCliques, $pivotChoosingFunction);
 }

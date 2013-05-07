@@ -63,6 +63,7 @@ $insertStmt = $sqlite->prepare($sql);
 
 
 //query to get the relevant data from mysql
+//selects all rows with 2 diff nodes, as long as there is at least 3 diff achievements in common between the 2 nodes
 $sql = "
 select t1.character_id node_a
 	 , t2.character_id node_b

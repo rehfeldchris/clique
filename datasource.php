@@ -27,14 +27,7 @@ function getAdjacencyList($limit) {
         $adjacencyList[$node_a][$node_b] = $node_b;
         $adjacencyList[$node_b][$node_a] = $node_a;
     }
-    
-    $sql = "select node_a, node_b from edges where node_a in (295228, 112935, 140040, 292052, 364134) or node_b in (295228, 112935, 140040, 292052, 364134)";
-    foreach ($dbh->query($sql) as $row) {
-		$node_a = (int) $row['node_a'];
-		$node_b = (int) $row['node_b'];
-        $adjacencyList[$node_a][$node_b] = $node_b;
-        $adjacencyList[$node_b][$node_a] = $node_a;
-    }
+
 
     return $adjacencyList;
 }

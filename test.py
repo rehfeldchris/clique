@@ -15,14 +15,6 @@ def getGraph():
 		node_a = int(row[0])
 		node_b = int(row[1])
 		G.add_edge(node_a, node_b)
-		
-		
-		
-	sql = "select node_a, node_b from edges where node_a in (295228, 112935, 140040, 292052, 364134) or node_b in (295228, 112935, 140040, 292052, 364134)"
-	for row in c.execute(sql):
-		node_a = int(row[0])
-		node_b = int(row[1])
-		G.add_edge(node_a, node_b)
 
 	return G
 		
